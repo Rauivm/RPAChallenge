@@ -15,7 +15,7 @@ ${url}    http://www.rpachallenge.com/
 ${browser}    chrome
 
 #   Locators
-
+${lStart}    xpath://button[. = 'Start']
 ${lFirstname}     xpath://input[@ng-reflect-name = 'labelFirstName']
 ${lLastname}     xpath://input[@ng-reflect-name = 'labelLastName']
 ${lEmail}     xpath://input[@ng-reflect-name = 'labelEmail']
@@ -33,9 +33,13 @@ Verifica Submissao  ${First Name}  ${Last Name}  ${Email}  ${Address}  ${Role in
 Start TestCase
     Open Browser  ${url}  ${browser}
     Maximize Browser Window
+    Wait Until Element Is Visible  ${lStart}
+    Click Button  ${lStart}
 
 Finish TestCase
+	Capture Page Screenshot
     Close Browser
+
 Preencher formulario
     [Arguments]    ${First Name}  ${Last Name}  ${Email}  ${Address}  ${Role in Company}  ${Company Name}  ${Phone Number}
     Input Text  ${lFirstname}  ${First Name}
@@ -45,5 +49,4 @@ Preencher formulario
     Input Text  ${lRoleinCompany}  ${Role in Company}
     Input Text  ${lCompanyName}  ${Company Name}
     Input Text  ${lPhoneNumber}  ${Phone Number}
-    Capture Page Screenshot
     Click Button  ${lSubmit}
